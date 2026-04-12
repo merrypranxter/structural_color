@@ -1,0 +1,8 @@
+order,m_min,m_max,phase_shift,constructive_condition,destructive_condition,visual_effect
+0,0,0,0,2nd=mλ,2nd=(m+0.5)λ,Central maximum
+1,1,1,π,2nd=(m+0.5)λ,2nd=mλ,First minimum/maximum
+2,2,2,2π,2nd=mλ,2nd=(m+0.5)λ,Second maximum/minimum
+3,3,3,3π,2nd=(m+0.5)λ,2nd=mλ,Third minimum/maximum
+4,4,4,4π,2nd=mλ,2nd=(m+0.5)λ,Fourth maximum/minimum
+5,5,5,5π,2nd=(m+0.5)λ,2nd=mλ,Fifth minimum/maximum
+m,m,m,mπ,2nd=(m±0.5)λ,2nd=mλ,General condition

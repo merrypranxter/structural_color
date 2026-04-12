@@ -1,0 +1,50 @@
+# Docker Compose for Structural Color Engine
+# For local development with consistent environment
+
+version: '3.8'
+
+services:
+  # Development server
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    
+  # Production build test
+  build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "8080:80"
+    
+  # Python tools
+  python:
+    build:
+      context: ./tools
+      dockerfile: Dockerfile.python
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+      - ./tools:/app
+    working_dir: /app
+    command: python analyze_wavelength.py
+    
+  # Documentation server
+  docs:
+    image: nginx:alpine
+    ports:
+      - "4000:80"
+    volumes:
+      - ./docs:/usr/share/nginx/html:ro
+      - ./README.md:/usr/share/nginx/html/README.md:ro

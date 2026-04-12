@@ -1,0 +1,92 @@
+name: Shader Submission
+description: Submit a new shader effect
+title: "[SHADER] "
+labels: ["shader", "enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Submit a new shader effect to the collection!
+
+  - type: input
+    id: shader_name
+    attributes:
+      label: Shader Name
+      description: Name of your shader effect
+      placeholder: thin_film_interference.frag
+    validations:
+      required: true
+
+  - type: dropdown
+    id: optical_phenomenon
+    attributes:
+      label: Optical Phenomenon
+      description: What optical phenomenon does this shader simulate?
+      options:
+        - Thin-Film Interference
+        - Diffraction
+        - Scattering
+        - Refraction
+        - Birefringence
+        - Photonic Crystal
+        - Biological Mimicry
+        - Abstract/Mathematical
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe what your shader does
+      placeholder: |
+        Simulates the iridescent colors seen in soap bubbles and oil 
+        slicks using thin-film interference equations.
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Shader Code
+      description: Paste your shader code here
+      render: glsl
+    validations:
+      required: true
+
+  - type: textarea
+    id: uniforms
+    attributes:
+      label: Uniforms
+      description: List any uniforms your shader uses
+      placeholder: |
+        - `u_time` - Animation time
+        - `u_resolution` - Screen resolution
+        - `u_film_thickness` - Thickness of the thin film
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Academic papers, articles, or other references
+      placeholder: |
+        - Hecht, Optics (4th Edition), Chapter 9
+        - https://en.wikipedia.org/wiki/Thin-film_interference
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Submission Agreement
+      description: By submitting this shader, you agree to license it under MIT
+      options:
+        - label: I agree to license this shader under the MIT License
+          required: true
+        - label: I have tested this shader on multiple browsers
+          required: true

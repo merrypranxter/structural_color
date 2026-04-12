@@ -1,0 +1,59 @@
+{
+  "name": "structural-color-engine",
+  "version": "1.2.0",
+  "description": "WebGL laboratory for structural color, thin-film optics, and iridescence",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.{js,glsl}",
+    "test": "vitest",
+    "analyze": "vite-bundle-analyzer"
+  },
+  "keywords": [
+    "webgl",
+    "three.js",
+    "shaders",
+    "glsl",
+    "structural-color",
+    "iridescence",
+    "thin-film",
+    "optics",
+    "physics",
+    "visualization"
+  ],
+  "author": "Structural Color Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/structural-color-engine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/structural-color-engine/issues"
+  },
+  "homepage": "https://github.com/yourusername/structural-color-engine#readme",
+  "dependencies": {
+    "three": "^0.160.0",
+    "stats.js": "^0.17.0",
+    "dat.gui": "^0.7.9"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "vite-plugin-glsl": "^1.2.1",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "vitest": "^1.0.0",
+    "vite-bundle-analyzer": "^0.8.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

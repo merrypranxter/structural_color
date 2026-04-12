@@ -1,0 +1,27 @@
+species,common_name,structure_type,dominant_color,peak_wavelength_nm,structure_size_nm,mechanism,reference
+Morpho rhetenor,Morpho Butterfly,ridges,blue,450,200,diffraction_grating,Vukusic1999
+Morpho didius,Giant Morpho,ridges,blue,440,220,diffraction_grating,Vukusic2001
+Parides sesostris, Emerald Swallowtail, multilayer, green, 520, 150, thin_film,Kinoshita2008
+Chrysochroa fulgidissima,Jewel Beetle,bragg_stack,green-gold,550,180,bragg_reflection,Parker2000
+Cetonia aurata,Rose Chafer,helical_stack,green-gold,530,160,cholesteric,Seago2009
+Plusiotis gloriosa,Glorious Beetle,bragg_stack,silver-gold,580,200,bragg_reflection,Schultz2001
+Heterorhina elegans,Flower Chafer,photonic_crystal,iridescent,500,300,photonic_crystal,Galusha2010
+Lamprocyphus augustus,Brazilian Weevil,photonic_crystal,iridescent,480,250,photonic_crystal,Galusha2008
+Pachyrhynchus argus,Weevil,photonic_crystal,blue-green,490,280,photonic_crystal,Welch2007
+Pavo cristatus,Indian Peafowl,photonic_crystal,blue-green,470,150,photonic_crystal,Zi2003
+Troides magellanus,Birdwing Butterfly,thin_film,yellow,580,120,thin_film_interference,Vukusic2002
+Urania ripheus,Madagascan Sunset Moth,ridges,iridescent,520,180,diffraction_grating,Yoshioka2004
+Asterocampa celtis,Hackberry Emperor,photonic_crystal,blue,460,200,photonic_crystal,Stavenga2014
+Callophrys rubi,Green Hairstreak,ridge_array,green,520,140,thin_film_interference,Giraldo2016
+Cyanophrys remus,Tropical Green Hairstreak,thin_film,green,530,160,thin_film_interference,Ghiradella1991
+Danaus plexippus,Monarch Butterfly,ridges,orange,600,250,scattering,Kanazawa2012
+Eupholus schoenherri,Weevil,blue_scales,blue,450,200,photonic_crystal,Steinbrecht1985
+Sternocera aequisignata,Jewel Beetle,bragg_stack,green,510,170,bragg_reflection,Schultz2001
+Serica sericea,Scarab Beetle,helical_stack,gold,580,190,cholesteric,Neville1977
+Hoplia coerulea,Scarab Beetle,thin_film,blue,470,130,thin_film_interference,Rassart2000
+Aphrodita aculeata,Sea Mouse,hair_array,iridescent,550,400,photonic_crystal,McPhedran2003
+Nereis pelagica,Ragworm,hair_array,green,520,350,photonic_crystal,Trzeciak2012
+Euplectella aspergillum,Venus Flower Basket,sponge_skeleton,iridescent,480,500,photonic_crystal,Aizenberg2004
+Coscinodiscus wailesii,Diatom,cell_wall,iridescent,500,600,photonic_crystal,Fuhrmann2004
+Pterosaur,extinct_reptile,skin_unknown,unknown,0,0,unknown,unknown
+Trilobite,extinct_arthropod,compound_eye,unknown,0,0,unknown,Parker1998

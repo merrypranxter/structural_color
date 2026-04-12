@@ -1,0 +1,115 @@
+{
+  "name": "Structural Color Engine",
+  "short_name": "StructColor",
+  "description": "WebGL laboratory for structural color, thin-film optics, and iridescence",
+  "version": "1.2.0",
+  "author": "Structural Color Contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/structural-color-engine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/structural-color-engine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/structural-color-engine/issues"
+  },
+  "keywords": [
+    "webgl",
+    "three.js",
+    "shaders",
+    "glsl",
+    "structural-color",
+    "iridescence",
+    "thin-film",
+    "optics",
+    "physics",
+    "visualization"
+  ],
+  "categories": [
+    "education",
+    "science",
+    "graphics",
+    "visualization"
+  ],
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#0a0a0a",
+  "orientation": "any",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/thin-film.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "features": [
+    "Real-time shader rendering",
+    "10+ structural color effects",
+    "Interactive parameter control",
+    "Post-processing effects",
+    "Educational documentation"
+  ],
+  "technologies": [
+    "WebGL 2.0",
+    "Three.js",
+    "GLSL",
+    "Vite",
+    "JavaScript ES2022"
+  ],
+  "shaders": {
+    "count": 10,
+    "categories": [
+      "thin-film",
+      "biological",
+      "photonic-crystal",
+      "optics",
+      "scattering",
+      "mathematical"
+    ],
+    "list": [
+      "thinFilmAcid",
+      "morphoButterfly",
+      "scarabBeetle",
+      "opalPhotonic",
+      "birefringence",
+      "newtonsRings",
+      "chromaticDispersion",
+      "rayleighScattering",
+      "quasicrystal",
+      "strangeAttractor"
+    ]
+  },
+  "data_files": {
+    "wavelength_rgb": {
+      "path": "data/wavelength_rgb.csv",
+      "description": "Wavelength to RGB conversion data",
+      "records": 41,
+      "range": "380-780nm"
+    },
+    "refractive_indices": {
+      "path": "data/refractive_indices.csv",
+      "description": "Refractive indices for common materials",
+      "records": 55
+    },
+    "biological_specimens": {
+      "path": "data/biological_specimens.csv",
+      "description": "Structural color measurements from nature",
+      "records": 28
+    },
+    "color_palettes": {
+      "path": "data/color_palettes.csv",
+      "description": "Procedural color palette parameters",
+      "records": 35
+    }
+  }
+}

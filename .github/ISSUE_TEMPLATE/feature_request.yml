@@ -1,0 +1,80 @@
+name: Feature Request
+description: Suggest an idea for this project
+title: "[FEATURE] "
+labels: ["enhancement", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature!
+
+  - type: input
+    id: title
+    attributes:
+      label: Feature Title
+      description: Short title for your feature request
+      placeholder: Add Moiré pattern interference shader
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does this feature fall under?
+      options:
+        - New Shader Effect
+        - Performance Improvement
+        - Documentation
+        - Data/Datasets
+        - UI/UX
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the feature you'd like to see
+      placeholder: |
+        A shader that simulates Moiré patterns created by overlapping 
+        fine grids, similar to what happens with woven fabrics or 
+        overlapping mesh screens.
+    validations:
+      required: true
+
+  - type: textarea
+    id: physics
+    attributes:
+      label: Physics/Mathematical Basis
+      description: If applicable, describe the physics or math behind this effect
+      placeholder: |
+        Moiré patterns arise from the interference between two periodic 
+        patterns. The beat frequency creates visible patterns at a much 
+        larger scale than the original grids.
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples
+      description: Provide examples of this effect in nature or existing implementations
+      placeholder: |
+        - Overlapping window screens
+        - Woven fabric patterns
+        - Digital camera sensor artifacts
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
