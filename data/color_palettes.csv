@@ -1,0 +1,31 @@
+palette_name,t,a_r,t_a_g,t_a_b,t_b_r,t_b_g,t_b_b,t_c_r,t_c_g,t_c_b,t_d_r,t_d_g,t_d_b,description
+acid,0.5,0.5,0.5,0.5,0.5,0.5,1.0,1.0,1.0,0.263,0.416,0.557,Lisa Frank 80s punk glam
+oil_slick,0.5,0.5,0.5,0.5,0.5,2.0,1.0,0.0,0.5,0.20,0.25,Dark iridescent spill
+sunset,0.5,0.5,0.5,0.5,0.5,1.0,0.7,0.4,0.8,0.1,0.1,Warm orange-red gradient
+ocean,0.5,0.5,0.5,0.5,0.5,0.5,0.8,1.0,0.3,0.5,0.7,Deep blue-cyan depths
+forest,0.5,0.5,0.5,0.5,0.5,0.8,1.0,0.3,0.2,0.6,0.1,Green nature tones
+nebula,0.5,0.5,0.5,0.5,0.5,1.0,0.5,1.0,0.6,0.2,0.8,Purple-pink cosmic
+lava,0.5,0.5,0.5,0.5,0.5,1.0,0.3,0.0,0.0,0.2,0.1,Red-orange volcanic
+ice,0.5,0.5,0.5,0.5,0.5,0.3,0.8,1.0,0.5,0.7,0.9,Cold blue-white
+gold,0.5,0.5,0.5,0.5,0.5,1.0,0.8,0.0,0.1,0.2,0.0,Metallic gold tones
+silver,0.5,0.5,0.5,0.5,0.5,0.8,0.8,1.0,0.0,0.0,0.1,Metallic silver
+rainbow,0.5,0.5,0.5,0.5,0.5,1.0,1.0,1.0,0.0,0.33,0.67,Full spectrum
+heat_map,0.5,0.5,0.5,0.5,0.5,1.0,0.0,0.0,0.0,0.5,1.0,Blue-red thermal
+electric,0.5,0.5,0.5,0.5,0.5,0.0,1.0,1.0,0.5,0.0,0.5,Cyan-magenta electric
+toxic,0.5,0.5,0.5,0.5,0.5,0.8,1.0,0.0,0.2,0.8,0.1,Green-yellow warning
+candy,0.5,0.5,0.5,0.5,0.5,1.0,0.5,0.8,0.3,0.7,0.9,Pink-purple sweet
+matrix,0.5,0.5,0.5,0.5,0.5,0.0,1.0,0.0,0.0,0.5,0.0,Green digital
+vaporwave,0.5,0.5,0.5,0.5,0.5,1.0,0.0,1.0,0.5,0.2,0.8,Pink-cyan retro
+monochrome,0.5,0.5,0.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Black and white
+sepia,0.5,0.5,0.5,0.3,0.2,0.1,0.6,0.4,0.2,0.1,0.0,0.0,Vintage brown tones
+ultraviolet,0.5,0.5,0.5,0.5,0.5,0.5,0.0,1.0,0.7,0.0,0.8,Purple violet glow
+infrared,0.5,0.5,0.5,0.5,0.5,1.0,0.0,0.0,0.0,0.0,0.0,Heat vision red
+aurora,0.5,0.5,0.5,0.5,0.5,0.0,1.0,0.5,0.3,0.5,0.7,Green-blue northern lights
+plasma,0.5,0.5,0.5,0.5,0.5,1.0,0.5,0.0,0.0,0.5,1.0,Hot ionized gas
+crystal,0.5,0.5,0.5,0.5,0.5,0.8,0.9,1.0,0.2,0.4,0.6,Clear prismatic
+magma,0.5,0.5,0.5,0.5,0.5,1.0,0.4,0.0,0.0,0.3,0.1,Molten rock
+prism,0.5,0.5,0.5,0.5,0.5,1.0,1.0,1.0,0.0,0.17,0.33,Light dispersion
+diffraction,0.5,0.5,0.5,0.5,0.5,2.0,1.5,1.0,0.0,0.33,0.67,CD rainbow effect
+interference,0.5,0.5,0.5,0.5,0.5,1.0,1.0,1.0,0.0,0.33,0.67,Thin film bands
+bragg,0.5,0.5,0.5,0.5,0.5,1.0,0.8,0.5,0.0,0.2,0.4,Beetle shell metallic
+scattering,0.5,0.5,0.5,0.5,0.5,0.4,0.7,1.0,0.3,0.5,0.7,Rayleigh blue sky

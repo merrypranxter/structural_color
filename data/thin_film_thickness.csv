@@ -1,0 +1,32 @@
+film_material,thickness_nm,first_order_color,second_order_color,third_order_color,application,notes
+soap_bubble,100,silver,silver,silver,entertainment,Very thin - almost transparent
+soap_bubble,200,yellow,purple,blue,entertainment,First visible colors
+soap_bubble,300,blue,yellow,red,entertainment,Common bubble thickness
+soap_bubble,400,green,purple,yellow,entertainment,Thick bubble film
+soap_bubble,500,pink,blue,green,entertainment,Near bursting thickness
+oil_slick,50,dark_brown,dark_brown,dark_brown,pollution,Very thin oil
+oil_slick,100,yellow,blue,red,pollution,First interference
+oil_slick,200,red,green,purple,pollution,Common road slick
+oil_slick,300,purple,yellow,blue,pollution,Thick oil layer
+oil_slick,400,blue,red,green,pollution,Heavy oil spill
+oxide_titanium,10,silver,silver,silver,optical_coating,Minimum thickness
+oxide_titanium,50,gold,gold,gold,optical_coating,Decorative coating
+oxide_titanium,100,blue,blue,blue,optical_coating,Interference filter
+oxide_titanium,150,green,green,green,optical_coating,Anti-reflection
+oxide_titanium,200,yellow,yellow,yellow,optical_coating,Bandpass filter
+silicon_dioxide,100,none,none,none,semiconductor,Native oxide
+silicon_dioxide,200,pale_blue,pale_blue,pale_blue,semiconductor,Gate oxide
+silicon_dioxide,500,iridescent,iridescent,iridescent,semiconductor,Thick oxide
+silicon_dioxide,1000,rainbow,rainbow,rainbow,semiconductor,Field oxide
+mica_flake,500,iridescent,iridescent,iridescent,cosmetics,Pearlescent pigment
+mica_flake,1000,strong_iridescent,strong_iridescent,strong_iridescent,cosmetics,Intense color
+mica_flake,2000,metallic,metallic,metallic,cosmetics,Opaque effect
+wing_scale_morpho,140,blue,blue,blue,biological,Morpho rhetenor
+wing_scale_morpho,160,blue_green,blue_green,blue_green,biological,Morpho didius
+wing_scale_utetheisa,180,orange,orange,orange,biological,Sunset moth
+beetle_cuticle,150,green,green,green,biological,Jewel beetle
+beetle_cuticle,200,gold,gold,gold,biological,Scarab beetle
+spider_silk,120,white,white,white,biological,Nephila silk
+butterfly_eye_ghori,300,iridescent,iridescent,iridescent,biological,Compound eye
+peacock_feather,150,blue,blue,blue,biological,Eye spot
+hummingbird_feather,180,iridescent_green,iridescent_green,iridescent_green,biological,Anna's hummingbird
