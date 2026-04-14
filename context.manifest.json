@@ -1,0 +1,19 @@
+{
+  "description": "Structural color physics \u2014 thin-film interference, iridescence, diffraction, biological specimens, GLSL shader guide, mathematical derivations",
+  "files": [
+    "README.md",
+    "docs/THEORY.md",
+    "docs/PHYSICS_CHEATSHEET.md",
+    "docs/MATHEMATICAL_DERIVATIONS.md",
+    "docs/SHADER_GUIDE.md",
+    "docs/BIOLOGICAL_INSPIRATION.md",
+    "docs/GLOSSARY.md",
+    "data/biological_specimens.csv",
+    "data/color_palettes.csv",
+    "data/refractive_indices.csv",
+    "data/wavelength_rgb.csv",
+    "data/thin_film_thickness.csv",
+    "data/interference_orders.csv",
+    "src/geometry/GyroidMesh.js"
+  ]
+}
