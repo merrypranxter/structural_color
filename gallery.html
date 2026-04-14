@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structural Color Gallery - Iridescence Physics Lab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
+      color: #e0e0e0;
+      overflow: hidden;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      height: 100vh;
+    }
+
+    .sidebar {
+      background: rgba(10, 0, 20, 0.95);
+      border-right: 3px solid #ff00ff;
+      padding: 25px 20px;
+      overflow-y: auto;
+      box-shadow: 5px 0 30px rgba(255, 0, 255, 0.3);
+    }
+
+    h1 {
+      font-size: 1.6em;
+      background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(30deg); }
+    }
+
+    .subtitle {
+      color: #00ffff;
+      font-size: 0.85em;
+      margin-bottom: 30px;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      color: #ff00ff;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #ff00ff44;
+      padding-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .shader-card {
+      background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.05));
+      border: 2px solid transparent;
+      border-image: linear-gradient(135deg, #ff00ff, #00ffff) 1;
+      padding: 15px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shader-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .shader-card:hover::before {
+      left: 100%;
+    }
+
+    .shader-card:hover {
+      transform: translateX(8px);
+      box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+    }
+
+    .shader-card.active {
+      background: linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.2));
+      border-image: linear-gradient(135deg, #ffff00, #00ffff) 1;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.5);
+    }
+
+    .shader-name {
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 6px;
+      font-size: 1.05em;
+      text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    }
+
+    .shader-type {
+      color: #00ffff;
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+
+    .shader-desc {
+      font-size: 0.85em;
+      opacity: 0.8;
+      line-height: 1.5;
+      color: #d0d0d0;
+    }
+
+    .canvas-area {
+      position: relative;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      max-width: 95%;
+      max-height: 95%;
+      border-radius: 15px;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.4),
+                  0 0 100px rgba(0, 255, 255, 0.2);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 50px rgba(255, 0, 255, 0.4), 0 0 100px rgba(0, 255, 255, 0.2); }
+      50% { box-shadow: 0 0 70px rgba(255, 0, 255, 0.6), 0 0 120px rgba(0, 255, 255, 0.4); }
+    }
+
+    .info-panel {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      right: 30px;
+      background: rgba(10, 0, 20, 0.95);
+      border: 3px solid;
+      border-image: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00) 1;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 700px;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .info-title {
+      font-size: 2em;
+      background: linear-gradient(135deg, #ff00ff, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .info-type {
+      color: #ffff00;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .info-desc {
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-size: 1.05em;
+    }
+
+    .info-physics {
+      background: rgba(0, 0, 0, 0.5);
+      border-left: 4px solid #00ffff;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    .info-physics h4 {
+      color: #00ffff;
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+
+    .formula {
+      background: #000;
+      color: #ff00ff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      border: 1px solid #ff00ff44;
+      font-size: 1.1em;
+    }
+
+    .info-examples {
+      background: rgba(255, 255, 0, 0.1);
+      border-left: 4px solid #ffff00;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .info-examples h4 {
+      color: #ffff00;
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+
+    .info-examples ul {
+      margin-left: 20px;
+      line-height: 1.9;
+    }
+
+    .info-examples li {
+      color: #e0e0e0;
+      font-size: 0.95em;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
+      background: rgba(10, 0, 20, 0.95);
+      border: 3px solid;
+      border-image: linear-gradient(135deg, #ffff00, #00ffff) 1;
+      border-radius: 15px;
+      padding: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .control-group label {
+      display: block;
+      color: #00ffff;
+      font-size: 0.85em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .control-value {
+      color: #ff00ff;
+      font-weight: bold;
+      float: right;
+      font-size: 1.1em;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, #1a0033, #ff00ff, #00ffff);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #ff00ff, #00ffff);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    button {
+      flex: 1;
+      background: linear-gradient(135deg, #ff00ff, #00ffff);
+      border: none;
+      color: #000;
+      padding: 14px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.85em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 0, 255, 0.6);
+    }
+
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ff00ff, #00ffff);
+      border-radius: 6px;
+    }
+
+    .wavelength-viz {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: linear-gradient(90deg, 
+        #8b00ff 0%,
+        #0000ff 20%,
+        #00ffff 40%,
+        #00ff00 50%,
+        #ffff00 60%,
+        #ff7700 80%,
+        #ff0000 100%
+      );
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h1>🌈 Structural Color</h1>
+      <div class="subtitle">Physics-Based Iridescence Lab</div>
+
+      <div class="button-group">
+        <button onclick="randomShader()">🎲 Random</button>
+        <button onclick="exportFrame()">📸 Export</button>
+      </div>
+      
+      <div class="section">
+        <h2>Thin-Film Interference</h2>
+        <div id="thinFilmList"></div>
+      </div>
+
+      <div class="section">
+        <h2>Biological Mimicry</h2>
+        <div id="biologicalList"></div>
+      </div>
+
+      <div class="section">
+        <h2>Optical Phenomena</h2>
+        <div id="opticalList"></div>
+      </div>
+
+      <div class="section">
+        <h2>Mathematical</h2>
+        <div id="mathList"></div>
+      </div>
+    </div>
+
+    <div class="canvas-area">
+      <div class="wavelength-viz"></div>
+      <canvas id="canvas" width="900" height="900"></canvas>
+      
+      <div class="info-panel" id="infoPanel"></div>
+      
+      <div class="controls">
+        <div class="control-group">
+          <label>Time Speed <span class="control-value" id="timeValue">1.0x</span></label>
+          <input type="range" id="timeSpeed" min="0" max="3" step="0.1" value="1" oninput="updateTimeSpeed(this.value)">
+        </div>
+        <div class="control-group">
+          <label>Film Thickness <span class="control-value" id="thicknessValue">1.0</span></label>
+          <input type="range" id="thickness" min="0.1" max="5" step="0.1" value="1" oninput="updateThickness(this.value)">
+        </div>
+        <div class="control-group">
+          <label>View Angle <span class="control-value" id="angleValue">0°</span></label>
+          <input type="range" id="viewAngle" min="0" max="90" step="1" value="0" oninput="updateAngle(this.value)">
+        </div>
+        <div class="control-group">
+          <label>Intensity <span class="control-value" id="intensityValue">1.0</span></label>
+          <input type="range" id="intensity" min="0" max="3" step="0.1" value="1" oninput="updateIntensity(this.value)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="structural_color_library.js"></script>
+  <script>
+    const shaders = [
+      {
+        id: 'thin_film',
+        name: 'Soap Bubble',
+        type: 'THIN-FILM INTERFERENCE',
+        category: 'thinFilm',
+        description: 'Simulates iridescent soap bubbles and oil slicks through thin-film optical interference. Colors arise from constructive and destructive interference between light waves reflected from the top and bottom surfaces of a thin transparent film.',
+        physics: 'Optical path difference: 2nd cos(θ). Constructive interference occurs when: 2nd cos(θ) = mλ (where m = 1,2,3...). Film thickness ranges from 100nm (blue) to 1000nm (red).',
+        formula: '2nd cos(θ) = mλ',
+        examples: [
+          'Soap bubbles: 100-1000nm thickness',
+          'Oil slicks on water',
+          'Oxidized metal surfaces',
+          'Anti-reflective coatings'
+        ],
+        shader: 'thin_film_interference'
+      },
+      {
+        id: 'morpho',
+        name: 'Morpho Butterfly',
+        type: 'DIFFRACTION GRATING',
+        category: 'biological',
+        description: 'Replicates the brilliant blue iridescence of Morpho butterfly wings. Microscopic tree-like structures (Christmas-tree scales) create a biological diffraction grating that selectively reflects blue wavelengths (350-500nm).',
+        physics: 'Diffraction grating equation: d(sin θᵢ + sin θₘ) = mλ. Scale ridges spaced ~200nm apart act as a multilayer reflector, enhanced by melanin backing that absorbs other wavelengths.',
+        formula: 'd(sin θᵢ + sin θₘ) = mλ',
+        examples: [
+          'Morpho rhetenor: Peak reflectance at 440nm',
+          'Scale ridge spacing: 150-250nm',
+          'Viewing angle dependence',
+          'Melanin absorption layer'
+        ],
+        shader: 'morpho_butterfly'
+      },
+      {
+        id: 'scarab',
+        name: 'Jewel Beetle',
+        type: 'BRAGG REFLECTOR',
+        category: 'biological',
+        description: 'Models the metallic coloration of scarab beetles and jewel beetles through multilayer Bragg reflection. Alternating layers of chitin and air create a biological photonic crystal that reflects specific wavelengths.',
+        physics: 'Bragg reflection: λ = 2nd cos(θ). Each layer pair reflects a narrow band of wavelengths. Multiple layers (20-40) create intense, pure colors through constructive interference.',
+        formula: 'λ = 2nd cos(θ)',
+        examples: [
+          'Chrysina gloriosa: Green metallic',
+          'Layer thickness: 100-150nm',
+          '20-40 alternating layers',
+          'Circularly polarized reflection'
+        ],
+        shader: 'scarab_beetle'
+      },
+      {
+        id: 'opal',
+        name: 'Opal Photonic',
+        type: '3D PHOTONIC CRYSTAL',
+        category: 'biological',
+        description: 'Simulates opal play-of-color through close-packed silica spheres forming a 3D photonic crystal. Different angles reveal different colors as Bragg reflection varies with sphere spacing and viewing geometry.',
+        physics: 'Bragg diffraction from FCC lattice: λ = (2/√3) * d * √(sin²θ - sin²φ). Sphere diameter 150-400nm determines color range. Amorphous arrangement creates broad spectral peaks.',
+        formula: 'λ = (2/√3) d √(sin²θ - sin²φ)',
+        examples: [
+          'Precious opal: 150-400nm spheres',
+          'Face-centered cubic packing',
+          'Angular color variation',
+          'Rainbow flashes in white light'
+        ],
+        shader: 'opal_photonic'
+      },
+      {
+        id: 'newtons_rings',
+        name: "Newton's Rings",
+        type: 'CONTACT INTERFERENCE',
+        category: 'thinFilm',
+        description: 'Demonstrates interference patterns formed between a spherical lens and flat glass surface. Concentric rings arise from the varying air gap thickness, creating alternating bright and dark bands.',
+        physics: 'Air gap varies as: t = r²/(2R) where R is lens radius of curvature. Bright rings occur when 2t = (m + 1/2)λ. Ring radius proportional to √m.',
+        formula: 't = r²/(2R), 2t = (m + 1/2)λ',
+        examples: [
+          'Lens testing and quality control',
+          'Measuring radius of curvature',
+          'Demonstrating wave nature of light',
+          'Gap thickness from ring spacing'
+        ],
+        shader: 'newtons_rings'
+      },
+      {
+        id: 'rayleigh',
+        name: 'Rayleigh Scattering',
+        type: 'WAVELENGTH SCATTERING',
+        category: 'optical',
+        description: 'Models atmospheric blue and sunset colors through Rayleigh scattering. Shorter wavelengths (blue) scatter more strongly than longer wavelengths (red), creating sky color and opalescence.',
+        physics: 'Scattering intensity ∝ 1/λ⁴. Blue light (450nm) scatters 9.4x more than red (650nm). Path length through atmosphere determines color: short path = blue, long path = red.',
+        formula: 'I ∝ 1/λ⁴',
+        examples: [
+          'Blue sky during day',
+          'Red/orange sunsets',
+          'Opalescent gemstones',
+          'Tyndall effect in colloids'
+        ],
+        shader: 'rayleigh_scattering'
+      },
+      {
+        id: 'chromatic',
+        name: 'Chromatic Dispersion',
+        type: 'WAVELENGTH REFRACTION',
+        category: 'optical',
+        description: 'Simulates rainbow formation and prismatic effects through wavelength-dependent refraction. Different wavelengths bend at different angles when passing through materials.',
+        physics: 'Refractive index varies with wavelength: n(λ). Cauchy equation: n(λ) = A + B/λ². Angular dispersion creates spectral separation.',
+        formula: 'n(λ) = A + B/λ²',
+        examples: [
+          'Prism rainbow effect',
+          'Lens chromatic aberration',
+          'Diamond fire',
+          'Atmospheric halos'
+        ],
+        shader: 'chromatic_dispersion'
+      },
+      {
+        id: 'birefringence',
+        name: 'Birefringence Stress',
+        type: 'PHOTOELASTIC EFFECT',
+        category: 'optical',
+        description: 'Visualizes stress patterns in transparent materials using polarized light. Mechanical stress induces birefringence, creating colorful interference patterns (Michel-Lévy chart colors).',
+        physics: 'Retardation δ = 2πd(nₑ - nₒ)/λ. Stress-induced birefringence proportional to stress magnitude. Crossed polarizers reveal isochromatic fringes.',
+        formula: 'δ = 2πd(nₑ - nₒ)/λ',
+        examples: [
+          'Stress analysis in glass',
+          'Michel-Lévy interference colors',
+          'Cellophane tape patterns',
+          'Mineral thin sections'
+        ],
+        shader: 'birefringence'
+      },
+      {
+        id: 'quasicrystal',
+        name: 'Quasicrystal',
+        type: 'APERIODIC TILING',
+        category: 'mathematical',
+        description: 'Generates Penrose-tiling inspired patterns with 5-fold rotational symmetry. Quasicrystals exhibit long-range order without translational periodicity, creating complex diffraction patterns.',
+        physics: 'Fourier transform shows sharp Bragg peaks despite aperiodicity. Golden ratio (φ = 1.618...) determines tile proportions. Diffraction pattern has 5-fold symmetry.',
+        formula: 'ρ(r) = Σ F(Q) e^(iQ·r)',
+        examples: [
+          'Penrose tiling patterns',
+          'Al-Pd-Mn alloy quasicrystals',
+          '5-fold and 10-fold symmetry',
+          'Non-repeating patterns'
+        ],
+        shader: 'quasicrystal'
+      },
+      {
+        id: 'attractor',
+        name: 'Strange Attractor',
+        type: 'CHAOTIC DYNAMICS',
+        category: 'mathematical',
+        description: 'Visualizes chaotic dynamical systems (Clifford, Peter de Jong) that create beautiful, infinitely detailed fractal structures. Color represents iteration density.',
+        physics: 'Iterative equations: x_{n+1} = sin(a·y_n) + c·cos(a·x_n), y_{n+1} = sin(b·x_n) + d·cos(b·y_n). Parameter space exploration reveals diverse morphologies.',
+        formula: 'x_{n+1} = f(x_n, y_n)',
+        examples: [
+          'Clifford attractor',
+          'Peter de Jong attractor',
+          'Chaotic phase space',
+          'Fractal dimension > 2'
+        ],
+        shader: 'strange_attractor'
+      }
+    ];
+
+    let canvas, gl, program;
+    let currentShader = null;
+    let timeSpeed = 1.0;
+    let thickness = 1.0;
+    let viewAngle = 0.0;
+    let intensity = 1.0;
+    let startTime = Date.now();
+
+    function init() {
+      renderShaderLists();
+      setupCanvas();
+      loadShader(shaders[0]);
+    }
+
+    function renderShaderLists() {
+      const categories = {
+        thinFilm: document.getElementById('thinFilmList'),
+        biological: document.getElementById('biologicalList'),
+        optical: document.getElementById('opticalList'),
+        mathematical: document.getElementById('mathList')
+      };
+
+      shaders.forEach((shader, index) => {
+        const card = `
+          <div class="shader-card" onclick="loadShader(shaders[${index}])" id="card-${shader.id}">
+            <div class="shader-type">${shader.type}</div>
+            <div class="shader-name">${shader.name}</div>
+            <div class="shader-desc">${shader.description.substring(0, 120)}...</div>
+          </div>
+        `;
+        categories[shader.category].innerHTML += card;
+      });
+    }
+
+    function loadShader(shader) {
+      currentShader = shader;
+
+      // Update active state
+      document.querySelectorAll('.shader-card').forEach(el => el.classList.remove('active'));
+      document.getElementById('card-' + shader.id).classList.add('active');
+
+      // Update info panel
+      document.getElementById('infoPanel').innerHTML = `
+        <div class="info-title">${shader.name}</div>
+        <div class="info-type">${shader.type}</div>
+        <div class="info-desc">${shader.description}</div>
+        
+        <div class="info-physics">
+          <h4>Physics Principle</h4>
+          <p>${shader.physics}</p>
+          <div class="formula">${shader.formula}</div>
+        </div>
+        
+        <div class="info-examples">
+          <h4>Natural Examples</h4>
+          <ul>
+            ${shader.examples.map(ex => `<li>${ex}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+
+      // Compile shader
+      compileShader(shader.shader);
+    }
+
+    function setupCanvas() {
+      canvas = document.getElementById('canvas');
+      gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+
+      if (!gl) {
+        alert('WebGL not supported');
+        return;
+      }
+    }
+
+    function compileShader(shaderName) {
+      const vertexSource = `
+        attribute vec4 a_position;
+        void main() {
+          gl_Position = a_position;
+        }
+      `;
+
+      const fragmentSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        uniform float u_thickness;
+        uniform float u_viewAngle;
+        uniform float u_intensity;
+
+        ${StructuralColorLibrary.utilities}
+        ${StructuralColorLibrary[shaderName]}
+
+        void main() {
+          vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+          vec3 col = ${shaderName}(uv, u_time, u_thickness, u_viewAngle, u_intensity);
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      const vertexShader = createGLShader(gl.VERTEX_SHADER, vertexSource);
+      const fragmentShader = createGLShader(gl.FRAGMENT_SHADER, fragmentSource);
+
+      if (!vertexShader || !fragmentShader) return;
+
+      if (program) gl.deleteProgram(program);
+
+      program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error('Link failed:', gl.getProgramInfoLog(program));
+        return;
+      }
+
+      gl.useProgram(program);
+
+      const positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        -1, -1, 1, -1, -1, 1, 1, 1
+      ]), gl.STATIC_DRAW);
+
+      const positionLoc = gl.getAttribLocation(program, 'a_position');
+      gl.enableVertexAttribArray(positionLoc);
+      gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+
+      render();
+    }
+
+    function createGLShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error('Shader error:', gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+
+      return shader;
+    }
+
+    function render() {
+      const time = (Date.now() - startTime) / 1000.0 * timeSpeed;
+
+      const resolutionLoc = gl.getUniformLocation(program, 'u_resolution');
+      const timeLoc = gl.getUniformLocation(program, 'u_time');
+      const thicknessLoc = gl.getUniformLocation(program, 'u_thickness');
+      const angleLoc = gl.getUniformLocation(program, 'u_viewAngle');
+      const intensityLoc = gl.getUniformLocation(program, 'u_intensity');
+
+      if (resolutionLoc) gl.uniform2f(resolutionLoc, canvas.width, canvas.height);
+      if (timeLoc) gl.uniform1f(timeLoc, time);
+      if (thicknessLoc) gl.uniform1f(thicknessLoc, thickness);
+      if (angleLoc) gl.uniform1f(angleLoc, viewAngle);
+      if (intensityLoc) gl.uniform1f(intensityLoc, intensity);
+
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(render);
+    }
+
+    function updateTimeSpeed(value) {
+      timeSpeed = parseFloat(value);
+      document.getElementById('timeValue').textContent = timeSpeed.toFixed(1) + 'x';
+    }
+
+    function updateThickness(value) {
+      thickness = parseFloat(value);
+      document.getElementById('thicknessValue').textContent = thickness.toFixed(1);
+    }
+
+    function updateAngle(value) {
+      viewAngle = parseFloat(value) * Math.PI / 180;
+      document.getElementById('angleValue').textContent = value + '°';
+    }
+
+    function updateIntensity(value) {
+      intensity = parseFloat(value);
+      document.getElementById('intensityValue').textContent = intensity.toFixed(1);
+    }
+
+    function randomShader() {
+      const random = shaders[Math.floor(Math.random() * shaders.length)];
+      loadShader(random);
+    }
+
+    function exportFrame() {
+      const link = document.createElement('a');
+      link.download = `structural-color-${currentShader.id}-${Date.now()}.png`;
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+
+    init();
+  </script>
+</body>
+</html>
